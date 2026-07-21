@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sentinel-AdPass</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">S</span>
+    <span class="brand-name">Sentinel-AdPass</span>
+  </div>
+  <div class="role-switch" role="tablist" aria-label="Select role">
+    <button class="role-btn is-active" data-role="advertiser" role="tab" aria-selected="true">Advertiser</button>
+    <button class="role-btn" data-role="reviewer" role="tab" aria-selected="false">Reviewer</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ADVERTISER VIEW -->
+  <section id="view-advertiser" class="view is-active">
+    <div class="panel form-panel">
+      <div class="panel-head">
+        <span class="eyebrow">Submit for review</span>
+        <h1>New ad submission</h1>
+        <p class="subtext">Every ad is checked against policy before it can enter the auction.</p>
+      </div>
+
+      <form id="ad-form" novalidate>
+        <label class="field">
+          <span class="field-label">Headline</span>
+          <input type="text" id="headline" name="headline" maxlength="100" placeholder="e.g. Try our new energy drink!" autocomplete="off" />
+          <span class="field-hint">1–100 characters</span>
+          <span class="field-error" data-error-for="headline"></span>
+        </label>
+
+        <label class="field">
+          <span class="field-label">Media URL</span>
+          <input type="text" id="mediaUrl" name="mediaUrl" placeholder="https://example.com/creative.jpg" autocomplete="off" />
+          <span class="field-hint">http:// or https://</span>
+          <span class="field-error" data-error-for="mediaUrl"></span>
+        </label>
+
+        <label class="field">
+          <span class="field-label">Bid amount (USD)</span>
+          <input type="text" inputmode="decimal" id="bidAmount" name="bidAmount" placeholder="250.00" autocomplete="off" />
+          <span class="field-hint">Positive number — range is checked during policy review</span>
+          <span class="field-error" data-error-for="bidAmount"></span>
+        </label>
+
+        <button type="submit" class="btn-primary" id="submit-btn">
+          <span class="btn-label">Submit ad</span>
+        </button>
+      </form>
+
+      <div id="submit-banner" class="banner is-hidden"></div>
+    </div>
+
+    <div class="panel result-panel" id="result-panel" hidden>
+      <div class="panel-head">
+        <span class="eyebrow">Result</span>
+        <h2 id="result-ad-id">—</h2>
+        <span class="status-chip" id="result-status">pending</span>
+      </div>
+      <div class="cards" id="result-cards"></div>
+    </div>
+  </section>
+
+  <!-- REVIEWER VIEW -->
+  <section id="view-reviewer" class="view">
+    <div class="reviewer-layout">
+      <div class="panel queue-panel">
+        <div class="panel-head">
+          <span class="eyebrow">Queue</span>
+          <h1>Pending ads</h1>
+        </div>
+        <div id="queue-list" class="queue-list">
+          <p class="empty-state">Loading queue…</p>
+        </div>
+        <button class="btn-ghost" id="refresh-queue">Refresh queue</button>
+      </div>
+
+      <div class="panel detail-panel" id="detail-panel">
+        <div class="empty-state detail-empty">
+          <p>Select an ad from the queue to review it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="/app.js"></script>
+</body>
+</html>
