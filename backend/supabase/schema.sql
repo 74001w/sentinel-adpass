@@ -25,3 +25,9 @@ create table if not exists ad_review_cards (
 );
 
 create index if not exists idx_ad_review_cards_ad_id on ad_review_cards(ad_id);
+
+create table if not exists auction_slots (
+  id text primary key,             -- format SLOT-1
+  ad_id text references ads(id),   -- null if the slot is currently empty
+  final_rank_score numeric         -- null if the slot is currently empty
+);

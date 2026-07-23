@@ -35,9 +35,12 @@ async function runAiPolicyReview({ headline, mediaUrl }) {
     throw new Error('No text response from AI review.');
   }
 
-  let cards;
+ let cards;
   try {
-    cards = JSON.parse(textBlock.text.trim());
+    // Strip markdown code fences if the model wraps its response in them,
+    // despite the prompt asking it not to, this makes parsing resilient either way.
+    const cleaned = textBlock.text.trim().replace(/^```(?:json)?\s*/i, '').replace(/```\s*$/i, '').trim();
+    cards = JSON.parse(cleaned);
   } catch (err) {
     throw new Error(`AI response was not valid JSON: ${err.message}`);
   }

@@ -4,9 +4,17 @@ A review pipeline that sits between an advertiser submitting an ad and that ad e
 
 **Disclaimer:** Sentinel-AdPass is an independent student project inspired by publicly available Netflix job postings, used only as research to shape a realistic pain point and system design. It is not affiliated with, endorsed by, or built for Netflix.
 
-Full product details live in the [PRD](./docs/Sentinel-AdPass_PRD.docx) — read it before writing any code.
+Full product details live in the [PRD](./docs/Sentinel-AdPass_PRD.docx), read it before writing any code.
 
 Full project reasoning and history (MVP, PRD, and wireframe development): https://claude.ai/share/71396732-f783-4043-81c9-8c8960789989
+
+---
+
+## Project Structure
+
+- `frontend/` — everything the browser loads (HTML, CSS, JS)
+- `backend/` — the server, database code, and seed script
+- Run all backend commands (`npm install`, `npm run dev`, `node seed.js`) from inside the `backend/` folder, not the project root
 
 ---
 
@@ -35,17 +43,18 @@ Full project reasoning and history (MVP, PRD, and wireframe development): https:
 Run this in order, before writing any new code:
 
 1. Clone the repo
-2. Copy `.env.example` to `.env`, fill in your real values
-3. Confirm your Node version matches the team's agreed version (`node -v`)
-4. Create the local database using the exact agreed name: `sentinel_adpass`
-5. Run the seed script, confirm it completes with no errors
-6. Confirm the backend starts locally with no errors before writing any new code
+2. `cd backend`
+3. Copy `.env.example` to `.env`, fill in your real values
+4. Confirm your Node version matches the team's agreed version (`node -v`)
+5. Create the local database using the exact agreed name: `sentinel_adpass`
+6. Run the seed script (`node seed.js`), confirm it completes with no errors
+7. Confirm the backend starts locally with no errors (`npm run dev`) before writing any new code
 
 ---
 
 ## Branch structure
 
-- `main` is protected — always working, never pushed to directly
+- `main` is protected, always working, never pushed to directly
 - Each person works in their own branch:
   - `rob-backend`
   - `vince-frontend`
@@ -69,7 +78,7 @@ No silent changes. Update the PRD's change log once agreed.
 ## Integration checkpoints
 
 - **Day 1:** everyone runs the setup checklist together, live
-- **End of week 1:** midpoint integration checkpoint — connect whatever exists so far, even incomplete
+- **End of week 1:** midpoint integration checkpoint, connect whatever exists so far, even incomplete
 - **Day before demo:** final integration pass + full demo rehearsal
 
 ---
