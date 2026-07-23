@@ -26,7 +26,6 @@ function renderSlots(data) {
   });
 }
 
-// TEMPORARY: using mock data. Once Rob's GET /api/auction/results is live,
-// replace this with:
-// fetch("/api/auction/results").then(r => r.json()).then(renderSlots);
-renderSlots(mockAuctionResults);
+fetch("/api/auction/results")
+  .then((r) => r.json())
+  .then(renderSlots);
