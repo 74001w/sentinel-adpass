@@ -1,3 +1,5 @@
+const sizeOf = require('image-size');
+
 // Values pulled straight from Working PRD sec 7.3 (Exact Values & Formats)
 const BID_MIN = 1.0;
 const BID_MAX = 100000.0;
@@ -17,36 +19,38 @@ function checkBidRange(bidAmount) {
   };
 }
 
-// Per PRD sec 5.1, the MVP does not verify a media URL points to a real,
-// working file. So this check reads dimensions from the filename's own
-// "-WIDTHxHEIGHT" convention (e.g. "lemonade-300x250.jpg") instead of
-// fetching the actual file, no network request needed.
-function checkImageDimensions(mediaUrl) {
-  const match = mediaUrl.match(/-(\d+)x(\d+)\.\w+(\?.*)?$/i);
+// Per PRD sec 5.2, this reads the media's actual width and height directly
+// by fetching the file and measuring the real pixel dimensions.
+async function checkImageDimensions(mediaUrl) {
+  try {
+    const response = await fetch(mediaUrl);
+    if (!response.ok) {
+      throw new Error(`request failed with status ${response.status}`);
+    }
+    const arrayBuffer = await response.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+    const dimensions = sizeOf(buffer);
 
-  if (!match) {
+    const widthOk = Math.abs(dimensions.width - IMAGE_WIDTH) <= IMAGE_TOLERANCE;
+    const heightOk = Math.abs(dimensions.height - IMAGE_HEIGHT) <= IMAGE_TOLERANCE;
+    const pass = widthOk && heightOk;
+
+    return {
+      ruleName: 'Image dimension check',
+      result: pass ? 'pass' : 'fail',
+      reason: pass
+        ? `Image is ${dimensions.width}x${dimensions.height}px, within tolerance of the required ${IMAGE_WIDTH}x${IMAGE_HEIGHT}px.`
+        : `Image is ${dimensions.width}x${dimensions.height}px, outside the allowed ${IMAGE_WIDTH}x${IMAGE_HEIGHT}px (±${IMAGE_TOLERANCE}px) size.`,
+      severity: 'normal'
+    };
+  } catch (err) {
     return {
       ruleName: 'Image dimension check',
       result: 'fail',
-      reason: `Could not determine dimensions from the media URL, expected a "-WIDTHxHEIGHT" filename pattern (e.g. "-300x250.jpg").`,
+      reason: `Could not read image dimensions from the provided URL (${err.message}).`,
       severity: 'normal'
     };
   }
-
-  const width = parseInt(match[1], 10);
-  const height = parseInt(match[2], 10);
-  const widthOk = Math.abs(width - IMAGE_WIDTH) <= IMAGE_TOLERANCE;
-  const heightOk = Math.abs(height - IMAGE_HEIGHT) <= IMAGE_TOLERANCE;
-  const pass = widthOk && heightOk;
-
-  return {
-    ruleName: 'Image dimension check',
-    result: pass ? 'pass' : 'fail',
-    reason: pass
-      ? `Media is ${width}x${height}px, within tolerance of the required ${IMAGE_WIDTH}x${IMAGE_HEIGHT}px.`
-      : `Media is ${width}x${height}px, outside the allowed ${IMAGE_WIDTH}x${IMAGE_HEIGHT}px (±${IMAGE_TOLERANCE}px) size.`,
-    severity: 'normal'
-  };
 }
 
 module.exports = { checkBidRange, checkImageDimensions };
