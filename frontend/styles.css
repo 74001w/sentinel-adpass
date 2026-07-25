@@ -127,6 +127,10 @@ main {
   grid-template-columns: minmax(0, 460px) 1fr;
 }
 
+#view-reviewer.is-active {
+  grid-template-columns: 1fr;
+}
+
 .reviewer-layout {
   display: grid;
   grid-template-columns: 320px 1fr;
@@ -139,6 +143,7 @@ main {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 28px;
+  min-width: 0;
 }
 
 .panel-head { margin-bottom: 22px; }
@@ -427,6 +432,30 @@ h2 { font-size: 19px; font-family: var(--font-mono); font-weight: 500; }
   }
   main { padding: 28px 18px 60px; }
   .topbar { padding: 16px 18px; }
+}
+
+/* ---------- Long-text overflow fix ---------- */
+/* Prevents long headlines (like a 100-character test headline) from
+   spilling outside their boxes instead of wrapping or being contained. */
+
+.queue-item-headline {
+  display: block;
+  max-width: 100%;
+}
+
+.card-stamp,
+.card-body,
+.queue-list,
+.cards {
+  min-width: 0;
+}
+
+.detail-ad-headline,
+.detail-ad-meta,
+.card-reason,
+.card-rule {
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 /* ---------- Reduced motion ---------- */
