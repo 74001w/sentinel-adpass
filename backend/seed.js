@@ -29,6 +29,8 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY
 );
 
+const { computeQualityScore, computeFinalRank } = require("./src/services/auctionService");
+
 // ──────────────────────────────────────────────────────────────────────────
 // 1. ads
 // ──────────────────────────────────────────────────────────────────────────
@@ -243,6 +245,24 @@ const auctionSlots = [
   { id: "SLOT-4", ad_id: null, final_rank_score: null },
   { id: "SLOT-5", ad_id: null, final_rank_score: null },
 ];
+
+// Recompute quality_score and final_rank_score using the real formulas from
+// auctionService.js, so seed data can never drift from what the live system
+// actually calculates. Fixes a bug found by Vince: AD-001 and AD-005's slot
+// scores were hand-typed placeholders that didn't match the real formula.
+ads.forEach((ad) => {
+  if (ad.status === "approved") {
+    const cardsForAd = reviewCards.filter((c) => c.ad_id === ad.id);
+    ad.quality_score = computeQualityScore(cardsForAd);
+  }
+});
+
+auctionSlots.forEach((slot) => {
+  if (slot.ad_id) {
+    const ad = ads.find((a) => a.id === slot.ad_id);
+    slot.final_rank_score = computeFinalRank(ad.bid_amount, ad.quality_score);
+  }
+});
 
 // ──────────────────────────────────────────────────────────────────────────
 // Seed runner
