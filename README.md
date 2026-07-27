@@ -12,6 +12,18 @@ Before an ad can be shown to users, it must be reviewed to make sure it follows 
 
 Sentinel-AdPass solves this with an AI performing the initial policy review quickly, while a human reviewer makes the final approval decision before an ad is allowed into the auction.
 
+## Screenshots
+
+### Ad Submission
+Advertiser view — every ad is checked against policy before it can enter the auction.
+
+![Ad Submission](docs/screenshots/submission-screen.png)
+
+### Reviewer — Manipulation Attempt Caught
+An adversarial ad with an embedded instruction trying to trick the AI reviewer into auto-approving it. The manipulation attempt check catches it and flags it as high severity, never following the embedded instruction.
+
+![Manipulation Attempt Flagged](docs/screenshots/manipulation-flag.png)
+
 Full project reasoning and history (MVP, PRD, and wireframe development): https://claude.ai/share/71396732-f783-4043-81c9-8c8960789989
 
 ---
