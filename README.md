@@ -22,6 +22,7 @@ Advertiser view — every ad is checked against policy before it can enter the a
 ### Reviewer — Manipulation Attempt Caught
 An adversarial ad with an embedded instruction trying to trick the AI reviewer into auto-approving it. The manipulation attempt check catches it and flags it as high severity, never following the embedded instruction.
 
+
 ![Manipulation Attempt Flagged](docs/screenshots/manipulation-flag.png)
 
 ---
