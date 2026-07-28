@@ -24,8 +24,6 @@ An adversarial ad with an embedded instruction trying to trick the AI reviewer i
 
 ![Manipulation Attempt Flagged](docs/screenshots/manipulation-flag.png)
 
-Full project reasoning and history (MVP, PRD, and wireframe development): https://claude.ai/share/71396732-f783-4043-81c9-8c8960789989
-
 ---
 
 ## Project Structure
