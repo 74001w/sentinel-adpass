@@ -22,14 +22,25 @@ Advertiser view — every ad is checked against policy before it can enter the a
 ### Reviewer — Manipulation Attempt Caught
 An adversarial ad with an embedded instruction trying to trick the AI reviewer into auto-approving it. The manipulation attempt check catches it and flags it as high severity, never following the embedded instruction.
 
-
 ![Manipulation Attempt Flagged](docs/screenshots/manipulation-flag.png)
+
+### Auction Dashboard — Live Ranking
+Approved ads ranked by combined bid and quality score, updating live as new ads are approved.
+
+![Auction Ranking](docs/screenshots/dashboard-ranking.png)
+
+### Auction Dashboard — Rejected Bids
+Ads that didn't pass review, shown for visibility alongside the live ranking.
+
+![Rejected Bids](docs/screenshots/dashboard-rejected.png)
 
 ---
 
 ## Project Structure
 
 - `frontend/` — everything the browser loads (HTML, CSS, JS)
+  - `index.html` — Advertiser submission + Reviewer queue/detail (toggle at the top)
+  - `dashboard.html` — live auction ranking + rejected bids
 - `backend/` — the server, database code, and seed script
 - Run all backend commands (`npm install`, `npm run dev`, `node seed.js`) from inside the `backend/` folder, not the project root
 
