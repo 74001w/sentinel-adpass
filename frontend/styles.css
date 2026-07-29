@@ -127,6 +127,10 @@ main {
   grid-template-columns: minmax(0, 460px) 1fr;
 }
 
+#view-reviewer.is-active {
+  grid-template-columns: 1fr;
+}
+
 .reviewer-layout {
   display: grid;
   grid-template-columns: 320px 1fr;
@@ -359,7 +363,8 @@ h2 { font-size: 19px; font-family: var(--font-mono); font-weight: 500; }
 }
 
 .queue-item-headline {
-  font-size: 13.5px;
+ display: block;
+ font-size: 13.5px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
