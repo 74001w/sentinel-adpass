@@ -6,7 +6,24 @@ A review pipeline that sits between an advertiser submitting an ad and that ad e
 
 Full product details live in the [PRD](./docs/Sentinel-AdPass_PRD.docx), read it before writing any code.
 
-Full project reasoning and history (MVP, PRD, and wireframe development): https://claude.ai/share/71396732-f783-4043-81c9-8c8960789989
+## The Problem
+
+Before an ad can be shown to users, it must be reviewed to make sure it follows company policies. Today, many of these reviews still require manual work. That slows advertisers down, delays campaigns, and increases the risk that unsafe or misleading ads could slip through. At scale, even small delays can affect advertiser trust, time-to-market, and brand safety.
+
+Sentinel-AdPass solves this with an AI performing the initial policy review quickly, while a human reviewer makes the final approval decision before an ad is allowed into the auction.
+
+## Screenshots
+
+### Ad Submission
+Advertiser view — every ad is checked against policy before it can enter the auction.
+
+![Ad Submission](docs/screenshots/submission-screen.png)
+
+### Reviewer — Manipulation Attempt Caught
+An adversarial ad with an embedded instruction trying to trick the AI reviewer into auto-approving it. The manipulation attempt check catches it and flags it as high severity, never following the embedded instruction.
+
+
+![Manipulation Attempt Flagged](docs/screenshots/manipulation-flag.png)
 
 ---
 
