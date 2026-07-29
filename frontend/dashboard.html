@@ -1,18 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Sentinel-AdPass — Auction Results</title>
-  <link rel="stylesheet" href="dashboard.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sentinel-AdPass — Auction Results</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="dashboard.css" />
 </head>
 <body>
-  <a href="index.html" style="color: inherit; text-decoration: underline;">← Back to Sentinel-AdPass</a>
-  <h1>Auction Ranking</h1>
-  <div id="slots-container"></div>
 
-  <h1>Rejected Bids</h1>
-  <div id="rejected-container"></div>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">S</span>
+    <span class="brand-name">Sentinel-AdPass</span>
+  </div>
+  <a class="btn-ghost back-link" href="index.html">← Back</a>
+</header>
 
-  <script src="dashboard.js"></script>
+<main class="dashboard-main">
+  <section class="panel dashboard-section">
+    <div class="panel-head">
+      <span class="eyebrow">Live ranking</span>
+      <h1>Auction ranking</h1>
+    </div>
+    <div id="slots-container" class="slots-grid"></div>
+  </section>
+
+  <section class="panel dashboard-section">
+    <div class="panel-head">
+      <span class="eyebrow">Not approved</span>
+      <h1>Rejected bids</h1>
+    </div>
+    <div id="rejected-container" class="slots-grid"></div>
+  </section>
+</main>
+
+<script src="dashboard.js"></script>
 </body>
 </html>
